@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+           
+           <bean id="ad1" class="com.lara.Advice1"/>
+           <bean id="asp1" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+           		<property name="advice" ref="ad1"/>
+           		<property name="pattern" value=".*"/>
+           </bean>
+           
+			<bean id="h1" class="com.lara.HelloImpl"/>
+			<bean id="advicedH1" class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces" value="com.lara.Hello"/>
+				<property name="target" ref="h1"/>
+				<property name="interceptorNames">
+					<list>
+						<value>asp1</value>
+					</list>
+				</property>
+			</bean>
+			
+			<bean id="t1" class="com.lara.TestImpl"/>
+			<bean id="adviceT1" class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces" value="com.lara.Test"/>
+				<property name="target" ref="t1"/>
+				<property name="interceptorNames">
+					<list>
+						<value>asp1</value>
+					</list>
+				</property>
+			</bean>
+			
+			<bean id="ad2" class="com.lara.Advice2"/>
+			<bean id="asp2" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+				<property name="advice" ref="ad2"/>
+				<property name="pattern" value=".*"/>
+			</bean>
+			
+			<bean id="gr" class="com.lara.GreetingImpl"/>
+			<bean id="advicedGr" class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces" value="com.lara.Greeting"/>
+				<property name="target" ref="gr"/>
+				<property name="interceptorNames">
+					<list>
+						<value>asp1</value>
+						<value>asp2</value>
+					</list>
+				</property>
+			</bean>	
+			
+			<bean id="ad3" class="com.lara.Advice3"/>
+			<bean id="asp3" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+				<property name="advice" ref="ad3"/>
+				<property name="pattern" value=".*"/>
+			</bean>
+			
+			<bean id="bk" class="com.lara.BookImpl"/>
+			<bean id="advicedBk" class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces" value="com.lara.Book"/>
+				<property name="target" ref="bk"/>
+				<property name="interceptorNames">
+					<list>
+						<value>asp3</value>
+					</list>
+				</property>
+			</bean>	
+			
+			<bean id="ad4" class="com.lara.Advice4"/>
+			<bean id="asp4" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+				<property name="advice" ref="ad4"/>
+				<property name="pattern" value=".*"/>
+			</bean>	
+			
+			<bean id="p1" class="com.lara.PersonImpl"/>
+			<bean id="p2" class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces" value="com.lara.Person"/>
+				<property name="target" ref="p1"/>
+				<property name="interceptorNames">
+					<list>
+						<value>asp4</value>
+					</list>
+				</property>
+			</bean>
+      </beans>
